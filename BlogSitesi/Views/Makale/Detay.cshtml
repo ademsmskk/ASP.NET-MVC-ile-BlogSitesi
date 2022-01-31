@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = Model.Baslik;
+}
+
+@model BlogSitesi.Models.Entity.Makale
+
+<div class="blog-posts classic-blog single">
+    <div class="post format-image">
+        <div class="meta"><span class="date">@Model.EklenmeTarihi</span><span class="categories"><a href="/Kategori/Index/@Model.KategoriID">@Model.Kategori.Adi</a>
+      </span><span class="comments"><
+           <a href="#Yorum">@Model.Yorum.Count <i class="icon-chat-1"></i></a></span></div>
+        <h1 class="post-title">@Model.Baslik</h1>
+        <figure class="main">
+            <img src="@Model.Resim.BuyukBoyut" alt="" />
+        </figure>
+        <div class="post-content">
+           <p>@Model.İcerik</p>
+
+           <div class="meta tags">
+               @foreach (BlogSitesi.Models.Entity.Etiket item in Model.Etiket)
+               {
+           <a href="/Etiket/Index/@item.EtiketId">@item.Adi</a>
+                }
+
+ 
+           </div>
+            <div class="click-share">
+                <ul>
+                    <li><a class="btn share-facebook" href="#">Beğen</a></li>
+                    <li><a class="btn share-twitter" href="#">Tweet</a></li>
+                    <li><a class="btn share-pinterest" href="#">Pin it</a></li>
+                </ul>
+            </div>
+            <!-- /.share-links -->
+
+        </div>
+    </div>
+    <!-- /.post -->
+
+</div>
+<!-- /.blog-posts -->
+
+<div class="about-author dark-wrapper">
+    <div class="author-image"> <img alt="" src="@Model.Resim.OrtaBoyut" /> </div>
+    <div class="author-details">
+        <h3>@Model.Kullanici.Adi @Model.Kullanici.Soyadi Hakkında</h3>
+        <p>@Model.Kullanici.Yazar</p>
+        <ul class="social">
+            <li><a href="#"><i class="icon-s-twitter"></i></a></li>
+            <li><a href="#"><i class="icon-s-facebook"></i></a></li>
+            <li><a href="#"><i class="icon-s-pinterest"></i></a></li>
+            <li><a href="#"><i class="icon-s-dribbble"></i></a></li>
+            <li><a href="#"><i class="icon-s-linkedin"></i></a></li>
+        </ul>
+    </div> 
+    <div class="clearfix"></div>
+</div>
+<div class="divide100"></div>
+
+<a id="Yorum"/>
+<div id="comments">
+    <h3>@Model.Yorum.Count Yorum</h3>
+    <ol id="singlecomments" class="commentlist">
+
+        @foreach (BlogSitesi.Models.Entity.Yorum yorum in Model.Yorum)
+        {
+            <li>
+                <div class="comment-wrapper">
+                    <div class="user"><img alt="" src="~/Content/image/defaultuser.png" class="avatar" /></div>
+                    <div class="message">
+                        <div class="arrow-box">
+                            <div class="info">
+                                <h2><a href="#">@yorum.AdSoyad</a></h2>
+                                <div class="meta"> <span class="date">@yorum.EklenmeTarihi.ToShortDateString()</span> <span class="reply"><a class="reply-link" href="#">Reply</a></span> </div>
+                            </div>
+                            <p>@yorum.Yorum1</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        }
+
+
+    </ol>
+</div>
+<!-- /#comments -->
+<div class="divide100"></div>
+<div class="comment-form-wrapper">
+    <h3>Düşüncelerini Paylaşmak İster misin?</h3>
+    <p>E mail adres gözükmeyecektir.Zorunlu alanlar * ile işaretlenmiştir.</p>
+    <form class="comment-form" name="form_name" action="/Makale/YorumYaz/@Model.MakaleId" method="post">
+        <div class="name-field">
+            <label><i class="icon-user"></i></label>
+            <input type="text" name="AdSoyad" placeholder="İsim Soyisim" />
+        </div>
+        <div class="email-field">
+            <label><i class="icon-mail-alt"></i></label>
+            <input type="text" name="email" placeholder="Email*" />
+        </div>
+        <div class="website-field">
+            <label><i class="icon-globe"></i></label>
+            <input type="text" name="website" placeholder="Website" />
+        </div>
+        <div class="message-field">
+            <textarea name="Yorum" id="textarea" rows="5" cols="30" title="Yorumunuzu Giriniz"></textarea>
+        </div>
+        <input type="submit" value="Submit" name="submit" class="btn btn-submit" />
+    </form>
+</div>

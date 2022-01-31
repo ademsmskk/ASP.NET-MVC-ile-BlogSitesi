@@ -1,0 +1,14 @@
+﻿
+@model IEnumerable<BlogSitesi.Models.Entity.Kategori>
+
+<div class="sidebox widget">
+    <h3 class="widget-title section-title">Kategoriler</h3>
+    <ul class="circled">
+        @foreach (BlogSitesi.Models.Entity.Kategori item in Model)
+        {
+            <li><a href="/Kategori/Index/@item.KategoriId">@item.Adi-@item.Makale.Count</a></li>
+        }
+
+
+    </ul>
+</div>

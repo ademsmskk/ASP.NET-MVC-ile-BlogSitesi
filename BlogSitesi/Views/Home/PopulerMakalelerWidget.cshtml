@@ -1,0 +1,21 @@
+﻿@model IEnumerable<BlogSitesi.Models.Entity.Makale>
+
+
+<div class="sidebox widget">
+    <h3 class="widget-title section-title">Popüler Makaleler</h3>
+    <ul class="post-list">
+        @foreach (BlogSitesi.Models.Entity.Makale item in Model)
+        {
+            <li>
+                <div class="icon-overlay"> <a href="/Makale/Detay/@item.MakaleId"><img src="#" alt="" /> </a> </div>
+                <div class="meta">
+                    <h5><a href="/Makale/Detay/@item.MakaleId">@item.Baslik</a></h5>
+                    <em>@item.EklenmeTarihi.ToShortDateString() <span class="comments"><a href="#">@item.Yorum.Count <i class="icon-chat-1"></i></a></span></em>
+                </div>
+            </li>
+        }
+
+
+    </ul>
+    <!-- /.post-list -->
+</div>

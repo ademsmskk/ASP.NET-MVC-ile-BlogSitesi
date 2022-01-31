@@ -1,0 +1,43 @@
+﻿@{ 
+    Layout = null;
+}
+
+@model IEnumerable<BlogSitesi.Models.Entity.Makale>
+
+@helper IcerikKısalt(string icerik) { 
+    if (icerik.Length>300)
+    {
+        @icerik.Substring(0, 300);
+
+    }
+    else
+    {
+        @icerik;
+    }
+    }
+
+
+<div class="blog-posts col-blog">
+    @foreach (BlogSitesi.Models.Entity.Makale item in Model)
+    {
+        <div class="post row">
+            <div class="col-sm-4">
+                <figure>
+                    <a href="/Makale/Detay/@item.MakaleId">
+                        <div class="text-overlay">
+                            <div class="info"><span>Daha Fazla</span></div>
+                        </div>
+                        <img src="@item.Resim.OrtaBoyut" alt="" />
+                    </a>
+                </figure>
+            </div>
+            <div class="col-sm-8 post-content">
+                <div class="meta"><span class="date">@item.EklenmeTarihi.ToShortDateString()</span><span class="comments"><a href="#">@item.Yorum.Count <i class="icon-chat-1"></i></a></span></div>
+                <h2 class="post-title"><a href="/Makale/Detay/@item.MakaleId">@item.Baslik</a></h2>
+                <p>@IcerikKısalt(item.İcerik)</p>
+            </div>
+        </div>
+
+    }
+
+</div>
